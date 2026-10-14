@@ -1,0 +1,38 @@
+[
+    {
+        "Model":"XGBoost",
+        "Accuracy":0.9662461774,
+        "Precision":0.9366085578,
+        "Recall":0.9690642763,
+        "F1 Score":0.9525600387,
+        "ROC-AUC":0.9947083894,
+        "Prediction Time (seconds)":0.3034275
+    },
+    {
+        "Model":"Random Forest",
+        "Accuracy":0.9650229358,
+        "Precision":0.9329056683,
+        "Recall":0.9697201574,
+        "F1 Score":0.9509567455,
+        "ROC-AUC":0.9946577648,
+        "Prediction Time (seconds)":1.318958208
+    },
+    {
+        "Model":"Decision Tree",
+        "Accuracy":0.9481651376,
+        "Precision":0.9101916193,
+        "Recall":0.9450153039,
+        "F1 Score":0.9272766277,
+        "ROC-AUC":0.9474371135,
+        "Prediction Time (seconds)":0.017376829
+    },
+    {
+        "Model":"Logistic Regression",
+        "Accuracy":0.9241972477,
+        "Precision":0.8541069487,
+        "Recall":0.9445780498,
+        "F1 Score":0.8970672203,
+        "ROC-AUC":0.979077669,
+        "Prediction Time (seconds)":0.053674739
+    }
+]
