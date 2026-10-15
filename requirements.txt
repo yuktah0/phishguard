@@ -1,0 +1,12 @@
+
+Flask
+pandas
+numpy
+scikit-learn
+xgboost
+shap
+joblib
+matplotlib
+dnspython
+python-whois
+requests
