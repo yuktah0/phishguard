@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard | URL Security</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #172033;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 22px 8%;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 760px;
+            margin: 75px auto;
+            padding: 0 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px #17255412;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 32px;
+        }
+
+        p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        label {
+            display: block;
+            margin: 25px 0 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 16px;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .note {
+            font-size: 13px;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>🛡️ PhishGuard</header>
+
+    <main>
+        <section class="card">
+            <h1>Check a Website URL</h1>
+            <p>
+                Analyze a URL using machine learning to assess
+                whether it may be a phishing website.
+            </p>
+
+            <form action="/check" method="POST">
+                <label for="url">Website URL</label>
+                <input
+                type="text"
+                id="url"
+                name="url"
+                placeholder="https://example.com"
+                value="{{ submitted_url or '' }}"
+                required
+                >
+
+                <button type="submit">
+                Check URL
+                </button>
+            </form>
+
+{% if error %}
+    <div style="margin-top: 20px; padding: 16px; background: #fef2f2; color: #991b1b; border-radius: 8px;">
+        <strong>Unable to analyze URL</strong>
+        <p>{{ error }}</p>
+    </div>
+{% endif %}
+
+{% if result %}
+    <div style="margin-top: 24px; padding: 22px; background: #f8fafc; border-radius: 12px;">
+        <h2>Analysis Result</h2>
+        <h3>{{ result }}</h3>
+        <p>Model confidence: <strong>{{ confidence }}%</strong></p>
+        <p>Legitimate probability: {{ legitimate_probability }}%</p>
+        <p>Phishing probability: {{ phishing_probability }}%</p>
+
+        <h4>Why did the model make this prediction?</h4>
+
+        <p>
+            The chart shows the features with the largest contributions
+            to this URL's prediction.
+        </p>
+
+        <img
+            src="{{ url_for('static', filename='shap_explanation.png') }}?v={{ confidence }}"
+            alt="SHAP feature importance explanation"
+            style="width: 100%; max-width: 700px; display: block; margin: 20px auto;"
+        >
+
+        <p style="font-size: 13px;">
+            These are model outputs, not a guarantee of website safety.
+        </p>
+    </div>
+{% endif %}
+
+
+            <p class="note">
+                Predictions are model-based assessments, not a guarantee
+                that a website is safe or malicious.
+            </p>
+        </section>
+    </main>
+</body>
+</html>
